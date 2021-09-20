@@ -13,8 +13,8 @@ end
 
 array_to_sort = [5,2,6,1,4,3]
 
-def merge_sort(current_array, array_to_compare)
-  items_to_sort = curreny_array.length
+def merge_sort(current_array, array_to_compare=[])
+  items_to_sort = current_array.length
   if items_to_sort <= 1 
     if current_array[0] < array_to_compare[0]
       return current_array[0]
@@ -22,21 +22,13 @@ def merge_sort(current_array, array_to_compare)
       return array_to_compare[0]
     end
   else
-    index_to_split_at = (items_to_sort / 2).floor
-    left_half = current_array[0..index_to_split_at]
-    right_half = current_array[index_to_split_at..-1]
+    elements_in_half = ((items_to_sort / 2).floor)
+    left_half = current_array.take(elements_in_half)
+    right_half = current_array.drop(elements_in_half)
     merge_sort(left_half, right_half)
     merge_sort(right_half, left_half)
   end
+  current_array
 end
 
 p merge_sort(array_to_sort)
-
-1) merge_sort splits array into left_half 5,2,6 and right_half 1,4,3
-2) merge_sort splits left_half into 5 and 2, 6 
-  2.1) 5 is a base case, so it needs to merge with 2, 6
-  2.2) 2, 6 is split into left_half 2 and right_half 6
-    2.21) 2 returns into sorted_array after being compared to right_half
-    2.22) 6 returns into sorted_array after being compared to left_half
-
-3) merge_sort splits right_half of array into 1 and 4,6
