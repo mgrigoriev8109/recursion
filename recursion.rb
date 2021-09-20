@@ -13,15 +13,20 @@ end
 
 array_to_sort = [5,2,6,1,4,3]
 
-def merge_sort(array)
+def merge_sort(array, sorted_array = Array.new(array.length))
   items_to_sort = array.length
-  if  items_to_sort <= 1 
+  if items_to_sort <= 1 
     #merge the two halves together and return result
   else
-    #split the array in half
-    #merge_sort(left_half)
-    #merge_sort(right_half)
+    index_to_split_at = (items_to_sort / 2).floor
+    left_half = array[0..index_to_split_at]
+    right_half = array[index_to_split_at..-1]
+    merge_sort(left_half, sorted_array = Array.new(array.length))
+    merge_sort(right_half, sorted_array = Array.new(array.length))
   end
 end
 
 p merge_sort(array_to_sort)
+
+splits array into 5,2,6 and into 1,4,3 and 
+  passing in a new sorted_array with the same length
