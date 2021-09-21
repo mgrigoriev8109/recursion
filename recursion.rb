@@ -17,18 +17,14 @@ def merge_sort(current_array)
     current_array
   else
     elements_in_half = (current_length / 2).floor
-    left_half = current_array.take(elements_in_half)
-    right_half = current_array.drop(elements_in_half)
-    sorted_left = merge_sort(left_half)
-    sorted_right = merge_sort(right_half)
+    sorted_left = merge_sort(current_array.take(elements_in_half))
+    sorted_right = merge_sort(current_array.drop(elements_in_half))
     merge(sorted_left, sorted_right)
   end
 end
 
-def merge(left_half, right_half)
-  sorted_array = []
-  number_of_merges = (left_half.length + right_half.length)
-  number_of_merges.times do
+def merge(left_half, right_half, sorted_array = [])
+  (left_half.length + right_half.length).times do
     if left_half[0].nil?
       sorted_array.push(right_half.shift)
     elsif right_half[0].nil?
